@@ -1,0 +1,89 @@
+### 1. Testar cadastro de funcionario
+POST http://localhost:3000/funcionario
+Content-Type: application/json
+
+{
+    "nome": "Roberto",
+    "email": "roberto@gmail.com",
+    "senha": "abc"
+}
+
+### 2. Fazer login do funcionario (armazena o token automaticamente)
+# @name loginReq
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email": "roberto@gmail.com",
+    "senha": "abc"
+}
+
+### 3. Testar cadastro de cliente (rota privada)
+POST http://localhost:3000/cliente
+Content-Type: application/json
+Authorization: {{loginReq.response.body.message.token}}
+
+{
+    "nome": "Santiago",
+    "cpf": "12345678912",
+    "email": "santiago@gmail.com",
+    "senha": "abc"
+}
+
+### 4. Testar cadastro de equipamento (rota privada)
+# Use em idCliente o codigo de um cliente existente no banco.
+POST http://localhost:3000/equipamento
+Content-Type: application/json
+Authorization: {{loginReq.response.body.message.token}}
+
+{
+    "modelo": "Painel Solar 550W",
+    "fabricante": "SolarTech",
+    "numSerie": "SOLAR-001",
+    "idCliente": 1
+}
+
+### 5. Testar cadastro de vistoria (rota privada)
+# Use em idEquipamento o codigo de um equipamento existente no banco.
+POST http://localhost:3000/vistoria
+Content-Type: application/json
+Authorization: {{loginReq.response.body.message.token}}
+
+{
+    "status": "PENDENTE",
+    "data": "2026-11-15",
+    "idEquipamento": 1
+}
+
+### 6. Listar funcionarios (rota privada)
+GET http://localhost:3000/funcionarios
+Authorization: {{loginReq.response.body.message.token}}
+
+### 7. Consultar cliente por ID (rota privada)
+GET http://localhost:3000/cliente/1
+Authorization: {{loginReq.response.body.message.token}}
+
+### 8. Consultar cliente por nome (rota privada)
+GET http://localhost:3000/cliente/buscarNome/Santiago
+Authorization: {{loginReq.response.body.message.token}}
+
+### 9. Listar clientes (rota privada)
+GET http://localhost:3000/clientes
+Authorization: {{loginReq.response.body.message.token}}
+
+### 10. Listar equipamentos (rota privada)
+GET http://localhost:3000/equipamentos
+Authorization: {{loginReq.response.body.message.token}}
+
+### 11. Listar vistorias (rota privada)
+GET http://localhost:3000/vistorias
+Authorization: {{loginReq.response.body.message.token}}
+
+# Exclusoes: execute somente quando quiser apagar os dados.
+# Clientes com equipamentos vinculados nao podem ser apagados.
+# Troque o ID 1 nas URLs pelo codigo do registro desejado.
+
+### 12. Apagar cliente por ID (rota privada)
+DELETE http://localhost:3000/cliente/1
+Authorization: {{loginReq.response.body.message.token}}
+
