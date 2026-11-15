@@ -16,7 +16,7 @@ Sistema de gestao de usina solar com Express, Sequelize, MySQL e frontend em HTM
 
 - Funcionario, equipamento e vistoria: cadastrar e listar.
 - Cliente: cadastrar, consultar por ID ou nome, listar e apagar.
-- Autenticacao: login e logout.
+- Autenticacao: login com token salvo no localStorage.
 
 Cadastre primeiro o cliente, depois seu equipamento e depois a vistoria. Use os codigos mostrados nas listagens nos campos de relacionamento.
 

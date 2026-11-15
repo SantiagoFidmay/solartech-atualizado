@@ -24,7 +24,6 @@ btn_login.addEventListener('click',(e)=>{
         resposta_login.innerHTML += `${dados.message.message || dados.message}`
         if(dados.message.token){
             localStorage.setItem('token', dados.message.token)
-            localStorage.setItem('nome',dados.message.nome)
             location.href = '../index.html'
         }
     })
